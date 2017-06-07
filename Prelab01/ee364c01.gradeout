@@ -1,0 +1,23 @@
+Prelab01/ee364c01/
+
+
+------------------------------------------------------------------------------------------
+FUNCTION                  | DESCRIPTION               | COMMENTS                  | POINTS    
+------------------------------------------------------------------------------------------
+check_file                  current directory           Test case passed.           2/2       
+check_file                  does not exist              Test case passed.           2/2       
+check_file                  no argument                 Test case passed.           1/1       
+exist                       does not exist              Test case passed.           1/1       
+exist                       exists                      Test case passed.           2/2       
+line_num                    no argument                 Test case passed.           1/1       
+line_num                    not readable                Test case passed.           1/1       
+line_num                    valid file                  Test case passed.           2/2       
+sensor_sum                  no argument                 Test case passed.           1/1       
+sensor_sum                  unreadable file             Test case passed.           1/1       
+sensor_sum                  valid data                  Test case passed.           2/2       
+sum                         range(50)                   Test case passed.           2/2       
+svncheck                    read from file_list         Test case passed.           1/1       
+svncheck                    svn set exec                Test case passed.           1/1       
+------------------------------------------------------------------------------------------
+
+Total Score = 20

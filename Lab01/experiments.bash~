@@ -1,0 +1,38 @@
+#! /bin/bash
+
+#---------------------------------------
+# $Author: ee364c01 $
+# $Date: 2017-01-17 15:32:13 -0500 (Tue, 17 Jan 2017) $
+#---------------------------------------
+
+# Do not modify above this line.
+
+if [[ $# < 1 ]]
+then 
+	echo "usage: experiments.bash <input 1> [input 2] .. [input N]"
+	exit 1
+else
+	for (( i=$#; i > 0; i-- ))
+	do
+		Filename=$1
+		echo $Filename:
+		if [[ ! -r $Filename ]]
+		then 
+			echo "Filename \"$Filename\" is not readable."
+		else 
+			exec 3< $Filename
+			while read line <&3
+			do 
+				name=$( echo $line | cut -d' ' -f1 )
+				measuresum=$(( $( echo $line | cut -d' ' -f2 ) + $( echo $line | cut -d' ' -f3 ) + $( echo $line | cut -d' ' -f4 ) ))
+				avg=$(( $measuresum / 3 ))
+				echo $name $measuresum $avg
+			done
+		fi
+		echo ""
+		shift
+	done
+	exit 0
+fi
+
+

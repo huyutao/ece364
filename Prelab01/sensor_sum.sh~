@@ -1,0 +1,24 @@
+#! /bin/bash
+
+if [[ $# != 1 ]]
+then 
+	echo "usage: sensor_sum.sh log"
+fi
+Filename=$1
+if [[ ! -r $Filename ]]
+then 
+	echo "error: $Filename is not a readable file!"
+else 
+	exec 3< $Filename
+	while read line <&3
+	do 
+		sensorid=$( echo $line | cut -d' ' -f1 | cut -d- -f1)		
+		measuresum=$(( $( echo $line | cut -d' ' -f2 ) + $( echo $line | cut -d' ' -f3 ) + $( echo $line | cut -d' ' -f4 ) ))
+		echo $sensorid $measuresum
+	done
+
+fi
+
+
+
+

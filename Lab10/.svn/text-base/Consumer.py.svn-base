@@ -1,0 +1,142 @@
+import sys
+
+from PySide.QtGui import *
+from BasicUI import *
+
+
+class Consumer(QMainWindow, Ui_MainWindow):
+
+    def __init__(self, parent=None):
+
+        super(Consumer, self).__init__(parent)
+        self.setupUi(self)
+        self.btnClear.clicked.connect(self.clear)
+        self.btnLoad.clicked.connect(self.loadData)
+        self.btnSave.clicked.connect(self.save)
+        self.btnSave.setDisabled(True)
+
+        self.components = [self.txtComponentName_1,self.txtComponentName_2,self.txtComponentName_3,self.txtComponentName_4,self.txtComponentName_5,self.txtComponentName_6,self.txtComponentName_7,self.txtComponentName_8,self.txtComponentName_9,self.txtComponentName_10,self.txtComponentName_11,self.txtComponentName_12,self.txtComponentName_13,self.txtComponentName_14,self.txtComponentName_15,self.txtComponentName_16,self.txtComponentName_17,self.txtComponentName_18,self.txtComponentName_19,self.txtComponentName_20]
+        self.components_count = [self.txtComponentCount_1,self.txtComponentCount_2,self.txtComponentCount_3,self.txtComponentCount_4,self.txtComponentCount_5,self.txtComponentCount_6,self.txtComponentCount_7,self.txtComponentCount_8,self.txtComponentCount_9,self.txtComponentCount_10,self.txtComponentCount_11,self.txtComponentCount_12,self.txtComponentCount_13,self.txtComponentCount_14,self.txtComponentCount_15,self.txtComponentCount_16,self.txtComponentCount_17,self.txtComponentCount_18,self.txtComponentCount_19,self.txtComponentCount_20]
+
+        self.txtStudentID.textChanged.connect(self.enable_save)
+        self.txtStudentName.textChanged.connect(self.enable_save)
+        self.chkGraduate.stateChanged.connect(self.enable_save)
+        self.cboCollege.currentIndexChanged.connect(self.enable_save)
+
+        for component in self.components:
+            component.textChanged.connect(self.enable_save)
+        for count in self.components_count:
+            count.textChanged.connect(self.enable_save)
+
+    def enable_save(self):
+        self.btnSave.setEnabled(True)
+
+    def loadDataFromFile(self, filePath):
+
+        with open(filePath,"r") as list_file:
+            lines = list_file.readlines()
+
+        line1 = lines[2]
+        line2 = lines[3]
+        line3 = lines[4]
+        grad,name,_ = line1.split(">")
+        grad = grad.split("\"")[1]
+        name = name.split("<")[0]
+        st_id = line2.split(">")[1]
+        st_id = st_id.split("<")[0]
+        college = line3.split(">")[1]
+        college = college.split("<")[0]
+        colleges=["----","Aerospace Engineering","Civil Engineering","Computer Engineering","Electrical Engineering","Industrial Engineering","Mechanical Engineering"]
+        self.txtStudentName.setText(name)
+        self.txtStudentID.setText(st_id)
+        self.cboCollege.setCurrentIndex(colleges.index(college))
+        if grad == "true":
+            self.chkGraduate.setChecked(True)
+
+        components_load = []
+        counts_load = []
+
+        for i in range(6,len(lines) - 2):
+            _,component,_,count,_ = lines[i].split("\"")
+            components_load.append(component)
+            counts_load.append(count)
+        for i in range(len(components_load)):
+            self.components[i].setText(components_load[i])
+            self.components_count[i].setText(counts_load[i])
+
+
+        """
+        Handles the loading of the data from the given file name. This method will be invoked by the 'loadData' method.
+        
+        *** YOU MUST USE THIS METHOD TO LOAD DATA FILES. ***
+        *** This method is required for unit tests! ***
+        """
+        pass
+
+    def loadData(self):
+        """
+        Obtain a file name from a file dialog, and pass it on to the loading method. This is to facilitate automated
+        testing. Invoke this method when clicking on the 'load' button.
+
+        *** DO NOT MODIFY THIS METHOD! ***
+        """
+        filePath, _ = QFileDialog.getOpenFileName(self, caption='Open XML file ...', filter="XML files (*.xml)")
+
+        if not filePath:
+            return
+
+        self.loadDataFromFile(filePath)
+
+    def clear(self):
+        self.txtStudentID.setText("")
+        self.txtStudentName.setText("")
+        self.chkGraduate.setChecked(False)
+        self.cboCollege.setCurrentIndex(0)
+        for component in self.components:
+            component.setText("")
+        for count in self.components_count:
+            count.setText("")
+        self.btnSave.setDisabled(True)
+
+    def save(self):
+        w_file = open("target.xml","w")
+        w_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+        w_file.write("<Content>\n")
+        name = self.txtStudentName.text()
+        st_id = self.txtStudentID.text()
+        if self.chkGraduate.isChecked():
+            grad = "true"
+        else:
+            grad = "false"
+        colleges=["----","Aerospace Engineering","Civil Engineering","Computer Engineering","Electrical Engineering","Industrial Engineering","Mechanical Engineering"]
+        college = colleges[self.cboCollege.currentIndex()]
+        w_file.write("    <StudentName graduate=\"{}\">{}</StudentName>\n".format(grad,name))
+        w_file.write("    <StudentID>{}</StudentID>\n".format(st_id))
+        w_file.write("    <College>{}</College>\n".format(college))
+        w_file.write("    <Components>\n")
+
+        components_save = []
+        counts_save = []
+        for i in range(20):
+            if len(self.components[i].text()):
+                components_save.append(self.components[i].text())
+                counts_save.append(self.components_count[i].text())
+        for i in range(len(components_save)):
+            w_file.write("        <Component name=\"{}\" count=\"{}\" />\n".format(components_save[i],counts_save[i]))
+
+        w_file.write("    </Components>\n")
+        w_file.write("</Content>")
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    currentApp = QApplication(sys.argv)
+    currentForm = Consumer()
+
+    currentForm.show()
+    currentApp.exec_()

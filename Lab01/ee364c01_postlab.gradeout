@@ -1,0 +1,29 @@
+---------------------------------------------------------
+experiments.bash
+---------------------------------------------------------
+1a. Incorrect number of arguments       Passed (3/3 pts)
+1b. Return code                         Passed (2/2 pts)
+2. Non-existent file                    Passed (5/5 pts)
+3. Calculation of sum, test#1           Passed (5/5 pts)
+4. Calculation of sum, test#2           Passed (5/5 pts)
+5. Calculation of average, test#1       Passed (5/5 pts)
+6. Calculation of average, test#2       Passed (5/5 pts)
+
+---------------------------------------------------------
+collect_stats.bash
+---------------------------------------------------------
+1a. Incorrect number of arguments       Passed (3/3 pts)
+1b. Return code                         Passed (2/2 pts)
+2a. Non-existent file                   Passed (3/3 pts)
+2b. Return code                         Passed (2/2 pts)
+3. Number of athletes, test#1           Passed (5/5 pts)
+4. Number of athletes, test#2           Passed (5/5 pts)
+5. Number of medals, test#1             Passed (5/5 pts)
+6. Number of medals, test#2             Passed (5/5 pts)
+7. Most medals won, test#1              Passed (5/5 pts)
+8. Most medals won, test#2              Passed (5/5 pts)
+9. Most medals won, test#3              Passed (5/5 pts)
+10. Most medals won, test#4             Passed (5/5 pts)
+
+---------------------------------------------------------
+Total Score: 80/80

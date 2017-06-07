@@ -1,0 +1,10 @@
+True
+False
+False
+True
+False
+True
+True
+['Brooks, Carol', 'Butler, Julia', 'Carter, Sarah', 'Edwards, Rachel', 'James, Randy', 'Miller, Aaron', 'Nelson, Louise', 'Rogers, Elizabeth', 'Washington, Annie']
+{'Torres, Betty': (53, '13:48:57'), 'Johnson, Roger': (50, '12:50:31'), 'Carter, Sarah': (70, '16:40:58'), 'Miller, Aaron': (68, '16:18:59'), 'Flores, Andrea': (46, '12:53:00'), 'James, Randy': (50, '14:03:33'), 'Russell, Scott': (35, '08:54:18'), 'Bennett, Nancy': (42, '10:38:33'), 'Butler, Julia': (56, '15:42:13'), 'Washington, Annie': (47, '12:52:16'), 'Edwards, Rachel': (56, '13:54:46'), 'Nelson, Louise': (39, '08:13:09'), 'Rogers, Elizabeth': (50, '11:10:01'), 'Cooper, Kelly': (36, '08:24:33'), 'Jackson, Doris': (56, '16:12:01'), 'Brooks, Carol': (47, '14:07:43'), 'Watson, Martin': (48, '11:28:37'), 'Bell, Kathryn': (50, '12:12:45'), 'Thompson, Michelle': (52, '13:20:05'), 'Davis, Douglas': (49, '13:02:50')}
+(56, '13:54:46')

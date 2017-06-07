@@ -1,0 +1,53 @@
+---------------------------------------------------------
+yards.bash
+---------------------------------------------------------
+1. Incorrect number of arguments        Passed (1/1 pts)
+2. Non-existent file                    FAILED (0/1 pts)
+YOUR OUTPUT:                                                              | EXPECTED OUTPUT:
+Error: noexist fakefile is not readable					  |	Error: noexist is not readable
+
+3. Variance and average calculation     Passed (4/4 pts)
+4. Largest average yardage              Passed (2/2 pts)
+
+---------------------------------------------------------
+run.bash
+---------------------------------------------------------
+1. Bad source file                      Passed (1/1 pts)
+2. Write to new output file             Passed (1/1 pts)
+3. Write to existing output file        Passed (1/1 pts)
+4. Fastest run time                     FAILED (0.5/1 pts)
+YOUR OUTPUT:                                                              | EXPECTED OUTPUT:
+Fastest run time achieved by Intel Core i7 with cache size 32 and issu	  |	Fastest run time achieved by Intel Core i7 with cache size 32 and issu
+
+5. Contents of output file              Passed (2/2 pts)
+
+---------------------------------------------------------
+process_temps.bash
+---------------------------------------------------------
+1a. Incorrect number of arguments       Passed (1/1 pts)
+1b. Return code                         Passed (1/1 pts)
+2a. Non-existent file                   Passed (1/1 pts)
+2b. Return code                         Passed (1/1 pts)
+3. Data file #1                         Passed (1/1 pts)
+3. Data file #2                         FAILED (0/1 pts)
+YOUR OUTPUT:                                                              | EXPECTED OUTPUT:
+Average temperature for time 0 was 46 C.				  |	Average temperature for time 0 was 43 C.
+Average temperature for time 20 was 45 C.				  |	Average temperature for time 20 was 56 C.
+Average temperature for time 25 was 56 C.				  |	Average temperature for time 25 was 49 C.
+Average temperature for time 30 was 60 C.				  |	Average temperature for time 30 was 57 C.
+Average temperature for time 35 was 68 C.				  |	Average temperature for time 35 was 60 C.
+Average temperature for time 40 was 60 C.				  |	Average temperature for time 40 was 59 C.
+Average temperature for time 45 was 51 C.				  |	Average temperature for time 45 was 50 C.
+Average temperature for time 50 was 57 C.				  |	Average temperature for time 50 was 59 C.
+Average temperature for time 55 was 40 C.				  |	Average temperature for time 55 was 50 C.
+Average temperature for time 60 was 52 C.				  |	Average temperature for time 60 was 49 C.
+Average temperature for time 65 was 53 C.				  |	Average temperature for time 65 was 49 C.
+Average temperature for time 70 was 65 C.				  |	Average temperature for time 70 was 58 C.
+Average temperature for time 75 was 50 C.				  |	Average temperature for time 75 was 58 C.
+Average temperature for time 80 was 54 C.				  |	Average temperature for time 80 was 55 C.
+Average temperature for time 85 was 38 C.				  |	Average temperature for time 85 was 49 C.
+Average temperature for time 90 was 60 C.				  |	Average temperature for time 90 was 63 C.
+Average temperature for time 100 was 66 C.				  |	Average temperature for time 100 was 63 C.
+
+---------------------------------------------------------
+Total Score: 17.5/20

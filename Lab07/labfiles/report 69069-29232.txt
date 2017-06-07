@@ -1,0 +1,6 @@
+Experiment No.      Date                Virus Name              Unit Count      Unit Cost
+-----------------------------------------------------------------------------------------
+153                 03/28/2015          Influenzavirus-B        152             $0.53
+137                 08/14/2015          Hepatovirus             078             $1.14
+314                 11/06/2015          Cardiovirus             001             $2.36
+278                 10/04/2015          Morbilivirus            167             $3.00

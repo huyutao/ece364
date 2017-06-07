@@ -1,0 +1,11 @@
+#! /bin/bash
+
+Num_Of_Param=$#
+let sum=0
+for((i = 0; i < $Num_Of_Param;i++))
+do
+	let sum=($sum+$1)
+	shift
+done
+printf "%d\n" $sum
+exit 0	

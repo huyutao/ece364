@@ -1,0 +1,38 @@
+#! /bin/bash
+
+#---------------------------------------
+# $Author$
+# $Date$
+#---------------------------------------
+
+# Do not modify above this line.
+
+if [[ $# < 1 ]]
+then 
+	echo "Usage: experiments.bash <input 1> [input 2] .. [input N]"
+	exit 1
+else
+	for (( i=$#; i > 0; i-- ))
+	do
+		Filename=$1
+		echo $Filename:
+		if [[ ! -r $Filename ]]
+		then 
+			echo "Filename \"$Filename\" is not readable."
+		else 
+			exec 3< $Filename
+			while read line <&3
+			do 
+				name=$( echo $line | cut -d' ' -f1 )
+				measuresum=$(( $( echo $line | cut -d' ' -f2 ) + $( echo $line | cut -d' ' -f3 ) + $( echo $line | cut -d' ' -f4 ) ))
+				avg=$(( $measuresum / 3 ))
+				echo $name $measuresum $avg
+			done
+		fi
+		echo ""
+		shift
+	done
+	exit 0
+fi
+
+

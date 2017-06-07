@@ -1,0 +1,133 @@
+import glob
+
+def getSummary():
+    with open("signals.txt","r") as list_file:
+        line = list_file.readlines()
+    d = {}
+    names= line[0].split()
+    for i in range(1,len(names)):
+        d[names[i]] = (9999,0,0)
+    for i in range(2,len(line)):
+        times = line[i].split()
+        for i in range(1,len(times)):
+            mint,sumt,maxt = d[names[i]]
+            if (float(times[i]) > maxt):
+                maxt = float(times[i])
+            if (float(times[i]) < mint):
+                mint = float(times[i])
+            sumt += float(times[i])
+            d[names[i]] = (mint,sumt,maxt)
+    for i in range(1,len(names)):
+        mint,sumt,maxt = d[names[i]]
+        avgt = sumt/(len(names)-1)
+        d[names[i]] = (mint,avgt,maxt)
+    return d
+
+
+
+def saveContinuousData(start, end, targetFileName):
+    with open("signals.txt","r") as list_file:
+        line = list_file.readlines()
+    start_t = start*8
+    start_t = int(start_t)
+    end_t = end*8
+    end_t = int(end_t)
+    l=[]
+    for i in range(start_t + 2,end_t + 2):
+        l.append(line[i])
+
+    with open(targetFileName,"w") as write_file:
+        for ssss in l:
+            write_file.write(ssss)
+
+
+
+
+def getSampledSignal(signalName):
+    with open("signals.txt","r") as list_file:
+        line = list_file.readlines()
+    d = {}
+    names= line[0].split()
+    for i in range(1,len(names)):
+        d[names[i]] = []
+    for i in range(2,len(line)):
+        times = line[i].split()
+        for i in range(1,len(times)):
+            if(times[0].split('.')[1] == "000"):
+                d[names[i]].append(times[i])
+    if signalName in d:
+        return d[signalName]
+    else:
+        return list()
+
+
+def make_store_dict(directory):
+    d = {}
+    s_name = directory[8:]
+    store = s_name.split(".")[0]
+    with open(directory,"r") as list_file:
+        line = list_file.readlines()
+    for i in range(3,len(line)):
+        mode = line[i].split(",")[0].strip()
+        price = line[i].split(',')[1].strip()
+        price = float(price[1:])
+        if mode not in d:
+            d[mode] = (price,store)
+        else:
+            old_price,old_store = d[mode]
+            if(old_price > price):
+                d[mode] = (price,store)
+    return d
+
+def make_dict():
+    files_id = glob.glob('Sources/*')
+    d={}
+    for filename in files_id:
+        s_name = filename[8:]
+        store = s_name.split(".")[0]
+        with open(filename,"r") as list_file:
+            line = list_file.readlines()
+        for i in range(3,len(line)):
+            mode = line[i].split(",")[0].strip()
+            price = line[i].split(',')[1].strip()
+            price = float(price[1:])
+            if mode not in d:
+                d[mode] = (price,store)
+            else:
+                old_price,old_store = d[mode]
+                if(old_price > price):
+                    d[mode] = (price,store)
+    return d
+
+
+def identifyCheapest(componentSet):
+    d = make_dict()
+    new_d = {}
+    for component in componentSet:
+        new_d[component]=d[component]
+    return new_d
+
+def getComponentsToAdd():
+    whole_d = make_dict()
+    files_id = glob.glob('Sources/*')
+    result = {}
+    for filename in files_id:
+        s_name = filename[8:]
+        store = s_name.split(".")[0]
+        store_d = make_store_dict(filename)
+        store_s = set()
+        for key, _ in whole_d.items():
+            if key not in store_d:
+                store_s.add(key)
+        result[store] = store_s
+    return result
+
+
+if __name__ == "__main__":
+    components={"Intel i7-4700HQ","Intel i7-6970HQ"}
+    print(identifyCheapest(components))
+    print(getComponentsToAdd())
+    print(getSummary())
+    print(getSampledSignal("ISO610"))
+    saveContinuousData(0, 1.25, "cont.txt")
+

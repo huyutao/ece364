@@ -1,0 +1,6 @@
+Experiment No.      Date                Virus Name              Unit Count      Unit Cost
+-----------------------------------------------------------------------------------------
+023                 04/28/2015          Lymphocryptovirus       030             $3.28
+017                 07/19/2015          Togaviridae             094             $1.20
+001                 03/16/2015          Filoviridae             005             $3.07
+495                 06/10/2015          Influenzavirus-C        160             $1.94

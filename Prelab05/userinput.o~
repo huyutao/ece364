@@ -1,0 +1,11 @@
+#! /bin/bash
+
+read -p "haha" Param_Value
+for ((i = $Param_Value; i>=0; i--))
+do
+	if (($i%3==0))
+	then	
+		printf "%d\n" $i
+	fi
+done
+exit 0

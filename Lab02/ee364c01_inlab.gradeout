@@ -1,0 +1,33 @@
+---------------------------------------------------------
+Sorting (40 pts)
+---------------------------------------------------------
+1) Invalid Input (5 pts)
+1a) Output Message (3 pts)				Passed
+1b) Exit with return code 2 (2 pts)			Passed
+2) Readable file with argument -f, return code 3 (5 pts)
+2a) Output Message (3 pts)				Passed
+2b) Exit with return code 3 (2 pts)			Passed
+3) --column number, retun code 4 (10 pts)
+3a) Valid Column number (5 pts)				Passed
+3b) Error Message (3 pts)				Passed
+3c) Exit with return code 4 (2 pts)			Passed
+4) Printing Sorting rows by column #<n> (10 pts)	Passed
+5) Sorting input file (5 pts)				Passed
+6) Saving the sorted file (5 pts)			Passed
+
+Total Score for Sorting: 40/40
+
+---------------------------------------------------------
+Hangman (40 pts)
+---------------------------------------------------------
+1) Randomly select a single word (10 pts)               Passed
+2) Print Your word is <x> letters long (5 pts)          Passed
+3) Prompt Make a guess:  (2 pts)                        Passed
+4) If letter Exists, print Good going! (15 pts)         Passed
+5) If letter does not exist or user enters a letter
+   already guessed (5 pts)                              Passed
+6) Game ends by printing Congratulations (3 pts)        Passed
+
+Total Score for hangman: 40/40
+
+Final Score: 80/80

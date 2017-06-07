@@ -1,0 +1,129 @@
+import re
+
+def getNumericData(sentence):
+    pattern = r"[+-]?[0-9]+\.?[0-9]*[Ee]?[+-]?[0-9]*"
+    l = re.findall(pattern,sentence)
+    return l
+
+def parseSimple(fileName):
+    with open(fileName,"r") as list_file:
+        lines = list_file.readlines()
+
+    pattern = r"\s*(?P<key>\"[\w]+\")\s*:\s*(?P<value>\"[\w\s\d,\.#-]+\")"
+    result = {}
+    for i in range(len(lines)):
+        data = lines[i]
+        m = re.match(pattern,data)
+        if m is not None:
+            key = m.group("key")
+            value = m.group("value")
+            key = key[1:-1]
+            value = value[1:-1]
+            result[key] = value
+    return result
+
+
+def parseLine(fileName):
+    with open(fileName,"r") as list_file:
+        line = list_file.readline()
+    pattern = r"\s*(?P<key>\"[\w]+\")\s*:\s*(?P<value>\"[\w\s\d,\.#-]+\")"
+    result = {}
+    l = re.findall(pattern,line)
+    for key,value in l:
+        key = key[1:-1]
+        value = value[1:-1]
+        result[key] = value
+    return result
+
+def isFloats(s):
+    pattern = r"[+-]?[0-9]+\.[0-9]+"
+    m = re.match(pattern,s)
+    if m is not None:
+        return True
+    else:
+        return False
+
+def isNum(s):
+    pattern = r"[+-]?[0-9]+\.?[0-9]*[Ee]?[+-]?[0-9]*"
+    m = re.match(pattern,s)
+    if m is not None:
+        return True
+    else:
+        return False
+
+def parseComplex(fileName):
+    with open(fileName,"r") as list_file:
+        lines = list_file.readlines()
+    pattern = r"\s*(?P<key>\"[\w]+\")\s*:\s*(?P<value>\"?[\w\s\d,\.#-]+\"?)"
+    result = {}
+    for i in range(len(lines)):
+        data = lines[i]
+        m = re.match(pattern,data)
+        if m is not None:
+            key = m.group("key")
+            value = m.group("value")
+            key = key[1:-1]
+            if(value[0] == "\""):
+                value = value[1:-1]
+            else:
+                value = value[:-1]
+                if value[len(value)-1] == ",":
+                    value = value[:-1]
+                if value == "true":
+                    value = True
+                elif value == "false":
+                    value = False
+                else:
+                    if isFloats(value):
+                        value = float(value)
+                    else:
+                        value = int(value)
+            # print(key)
+            # print(value)
+            result[key] = value
+    return result
+
+def parseComposite(fileName):
+    with open(fileName,"r") as list_file:
+        lines = list_file.readlines()
+    pattern = r"\s*(?P<key>\"[\w]+\")\s*:\s*(?P<value>\"?[\w\s\d,\.#-]+\"?)"
+    result = {}
+    for i in range(len(lines)):
+        data = lines[i]
+        m = re.match(pattern,data)
+        if m is not None:
+            key = m.group("key")
+            value = m.group("value")
+            key = key[1:-1]
+            if(value[0] == "\""):
+                value = value[1:-1]
+            else:
+                value = value[:-1]
+                if value[len(value)-1] == ",":
+                    value = value[:-1]
+                if value == "true":
+                    value = True
+                elif value == "false":
+                    value = False
+                elif isNum(value):
+                    if isFloats(value):
+                        value = float(value)
+                    else:
+                        value = int(value)
+                else:
+                    pass
+            print(key)
+            print(value)
+            result[key] = value
+    return result
+
+
+if __name__ == "__main__":
+    # s = "With the electron's charge being -1.0622e-19, some choices you have are -110, -32.0 and +55. Assume that pi equals 3.1415, 'e' equals 2.7 and Na is +6.022E+023."
+    # print(getNumericData(s))
+    # print(parseSimple("simple.json"))
+    # print(parseLine("simple2.json"))
+    # print(parseComplex("complex.json"))
+    parseComposite("composite.json")
+
+
